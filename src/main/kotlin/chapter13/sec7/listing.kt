@@ -76,10 +76,7 @@ val lines: List<String> = emptyList()
 //tag::init5[]
 fun movingAvg(n: Int, l: List<Double>): List<Double> = TODO()
 
-val cs = movingAvg(
-    5, lines.map { s ->
-        fahrenheitToCelsius(s.toDouble())
-    }).map { it.toString() }
+val cs = movingAvg(5, lines.map { s -> fahrenheitToCelsius(s.toDouble()) }).map { it.toString() }
 //end::init5[]
 
 //tag::init6[]
@@ -90,3 +87,5 @@ fun <A, B> windowed(
     M: Monoid<B>
 ): List<B> = TODO()
 //end::init6[]
+
+

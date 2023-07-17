@@ -5,7 +5,7 @@
 - 레이피케이션이 어떤 흐름으로 이루어지는지 이해하기
 - 레이피케이션을 통해서 어떤 개념들이 명시화되는지 이해하기
 
-## 13 External effect and I/O
+# 13 External effect and I/O
 
 - 모나드는 값을 포장해서 순차적인 계산을 컴포지션 할 수 있게하는 효과를 제공한다.
 
@@ -752,17 +752,17 @@ val cs = movingAvg(
 
 
 ## 요약
-- pure core 랑 side effect 로 나눌 수 있음, 실제 출력을 묘사만 하는 IO 타입을 도입해서 expression 과 실제 side effect 를 분리해 냄.
-  IO 는 monad 여서 이 expression 연산들을 결합 할 수 있음. (컨택스트를 가지는 결합 연산을 만들 수 있음)
-  연산을 stack-safe 하게 계산하기 위해서 reification 해서 각각 의미를 가지는 데이터 타입을 생성하는 컨스트럭터를 도입, Suspend 는 결과를 생성하기 위해 실행하야할 effect 를 의미한다.
-  IO 타입에서 각각의 관심사로 Tailrec, Async 와 그 interpreter 를 정의, Free 를 정의 Free<Function0, A> 는 Tailrec, Free<Par, A> 는 Async,
-  Monad 가 있으면 실행 가능한 Free 의 interpreter 정의.
-  Console 정의, Free<Console, A> 는 ConsoleIO, Console 은 Monad 가 아님으로 ConsoleIO 는 그 자체로 interpreter 에 의해 해석될 수 없음으로,
-  Console 을 Monad 인 특정 타입으로 변환 시키는 Translate 정의.
-  Monad 와 Translate 가 있으면 실행 가능한 Free 의 interpreter 정의.
-  ConsoleIO 가 Free<Function0, A> 로 해석 될 때 이 interpreter 는 stack-safe 하지 않음으로, Free<Function0, A> 로 변환 시킨다음
-  interpreter 로 runTrampoline 을 사용하는 전용 interpreter 정의.
-  모든 단점을 극복한 typealias IO<A> = Free<ForPar, A> 를 정의. 어떤 IO 를 수행하는지는 instruction set 을 명시 하는 F 에 의해 표현된다. 
-  이 F 는 최종적으로 Par 로 translate 되어야 한다.
-  IO 타입은 외부세계와의 상호작용을 표현하는 최소한의 공통 분모로써 중요하지만, composable 할 수 없다는 한계가 있기 때문에 개별 요소의 묶음을 추상화 하는 List 와 같이,
-  IO 계산에서 사용될 수 있는 composable 한 abstractions 이 필요하다.
+- pure core 랑 side effect 로 나눌 수 있음, 실제 출력을 묘사만 하는 IO 타입을 도입해서 expression 과 실제 side effect 를 분리해 냄.  
+  IO 는 monad 여서 이 expression 연산들을 결합 할 수 있음. (컨택스트를 가지는 결합 연산을 만들 수 있음)  
+  연산을 stack-safe 하게 계산하기 위해서 reification 해서 각각 의미를 가지는 데이터 타입을 생성하는 컨스트럭터를 도입, Suspend 는 결과를 생성하기 위해 실행하야할 effect 를 의미한다.  
+  IO 타입에서 각각의 관심사로 Tailrec, Async 와 그 interpreter 를 정의, Free 를 정의 Free<Function0, A> 는 Tailrec, Free<Par, A> 는 Async,  
+  Monad 가 있으면 실행 가능한 Free 의 interpreter 정의.  
+  Console 정의, Free<Console, A> 는 ConsoleIO, Console 은 Monad 가 아님으로 ConsoleIO 는 그 자체로 interpreter 에 의해 해석될 수 없음으로,  
+  Console 을 Monad 인 특정 타입으로 변환 시키는 Translate 정의.  
+  Monad 와 Translate 가 있으면 실행 가능한 Free 의 interpreter 정의.  
+  ConsoleIO 가 Free<Function0, A> 로 해석 될 때 이 interpreter 는 stack-safe 하지 않음으로, Free<Function0, A> 로 변환 시킨다음  
+  interpreter 로 runTrampoline 을 사용하는 전용 interpreter 정의.  
+  모든 단점을 극복한 typealias IO<A> = Free<ForPar, A> 를 정의. 어떤 IO 를 수행하는지는 instruction set 을 명시 하는 F 에 의해 표현된다.   
+  이 F 는 최종적으로 Par 로 translate 되어야 한다.  
+  IO 타입은 외부세계와의 상호작용을 표현하는 최소한의 공통 분모로써 중요하지만, composable 할 수 없다는 한계가 있기 때문에 개별 요소의 묶음을 추상화 하는 List 와 같이,  
+  IO 계산에서 사용될 수 있는 composable 한 abstractions 이 필요하다.  
